@@ -2,7 +2,10 @@ import cors from 'cors';
 import 'dotenv/config';
 import express from 'express';
 import { errorHandler, notFoundHandler } from './middleware/error-handler';
+import { authRouter } from './routes/auth.routes';
 import { categoryRouter } from './routes/category.routes';
+import { customerRouter } from './routes/customer.routes';
+import { orderRouter } from './routes/order.routes';
 import { productRouter } from './routes/product.routes';
 
 const app = express();
@@ -19,8 +22,11 @@ app.get('/api/health', (_request, response) => {
   });
 });
 
+app.use('/api/auth', authRouter);
 app.use('/api/categories', categoryRouter);
 app.use('/api/products', productRouter);
+app.use('/api/customers', customerRouter);
+app.use('/api/orders', orderRouter);
 app.use(notFoundHandler);
 app.use(errorHandler);
 

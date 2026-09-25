@@ -59,3 +59,24 @@ export function nonNegativeInteger(value: unknown, field: string): number {
   return number;
 }
 
+export function positiveInteger(value: unknown, field: string): number {
+  const number = Number(value);
+
+  if (!Number.isInteger(number) || number <= 0) {
+    throw new ApiError(400, `El campo ${field} debe ser un entero mayor que cero.`);
+  }
+
+  return number;
+}
+
+export function emailText(value: unknown): string {
+  const email = requiredText(value, 'email').toLowerCase();
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailPattern.test(email)) {
+    throw new ApiError(400, 'El correo electrónico no tiene un formato válido.');
+  }
+
+  return email;
+}
+

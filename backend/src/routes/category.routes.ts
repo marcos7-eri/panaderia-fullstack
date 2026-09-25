@@ -6,12 +6,13 @@ import {
   listCategories,
   updateCategory
 } from '../controllers/category.controller';
+import { requireAdmin } from '../middleware/auth';
 
 export const categoryRouter = Router();
 
 categoryRouter.get('/', listCategories);
 categoryRouter.get('/:id', getCategory);
-categoryRouter.post('/', createCategory);
-categoryRouter.put('/:id', updateCategory);
-categoryRouter.delete('/:id', deleteCategory);
+categoryRouter.post('/', requireAdmin, createCategory);
+categoryRouter.put('/:id', requireAdmin, updateCategory);
+categoryRouter.delete('/:id', requireAdmin, deleteCategory);
 
