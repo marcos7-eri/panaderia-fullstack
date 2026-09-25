@@ -74,3 +74,27 @@ Este documento conserva los prompts utilizados durante el desarrollo del proyect
 
 **Evidencia sugerida:** captura del árbol de carpetas y de las versiones de Node.js, npm, Git, Docker y Docker Compose.
 
+## Prompt 03 — Diseño de la base de datos
+
+**Objetivo:** definir el modelo relacional de la panadería y preparar su creación reproducible en PostgreSQL.
+
+**Prompt utilizado:**
+
+> Actúa como diseñador de bases de datos y desarrollador backend. Diseña la base de datos PostgreSQL de la aplicación de panadería utilizando Prisma ORM. Incluye administradores, categorías, productos, clientes, pedidos y detalles de pedido. Define claves primarias, claves foráneas, restricciones, estados de pedido, precios decimales, stock y fechas de auditoría. Crea el archivo `schema.prisma`, una migración inicial versionada y un script de datos de prueba con categorías y productos. La estructura debe ser clara, normalizada y apropiada para un proyecto universitario. Explica las relaciones y no implementes todavía los controladores CRUD.
+
+**Resultado:** se crearon seis modelos (`User`, `Category`, `Product`, `Customer`, `Order` y `OrderItem`), enumeraciones para roles y estados, relaciones e índices, una migración inicial y datos de prueba reutilizables.
+
+**Evidencia sugerida:** captura de `schema.prisma`, del resultado de `npx prisma validate` y de las tablas ejecutándose en PostgreSQL.
+
+### Prompt 03.1 — Corrección de Prisma en Docker
+
+**Objetivo:** diagnosticar y corregir el reinicio continuo del backend durante la ejecución de las migraciones.
+
+**Prompt utilizado:**
+
+> El contenedor del backend se reinicia. Los registros indican que Prisma no puede detectar OpenSSL y muestran el error `Could not parse schema engine response`. La base de datos PostgreSQL está saludable, pero todavía no contiene relaciones. Diagnostica la causa y corrige la configuración de Docker sin eliminar el volumen de datos.
+
+**Resultado:** se sustituyó la imagen Alpine del backend por `node:22-bookworm-slim` y se instalaron explícitamente OpenSSL y los certificados necesarios en las etapas de compilación y ejecución.
+
+**Evidencia sugerida:** captura de los registros anteriores al cambio y del backend saludable después de reconstruir la imagen.
+
