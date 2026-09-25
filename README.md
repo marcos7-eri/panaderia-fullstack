@@ -75,3 +75,37 @@ Para cargar los productos de ejemplo después de iniciar PostgreSQL:
 ```bash
 docker compose exec backend npm run db:seed
 ```
+
+## API REST
+
+La URL base del backend es `http://localhost:3000/api`.
+
+| Método | Ruta | Función |
+|---|---|---|
+| `GET` | `/categories` | Listar categorías activas |
+| `GET` | `/categories/:id` | Consultar una categoría y sus productos |
+| `POST` | `/categories` | Crear una categoría |
+| `PUT` | `/categories/:id` | Actualizar una categoría |
+| `DELETE` | `/categories/:id` | Desactivar una categoría |
+| `GET` | `/products` | Listar productos activos |
+| `GET` | `/products/:id` | Consultar un producto |
+| `POST` | `/products` | Crear un producto |
+| `PUT` | `/products/:id` | Actualizar un producto |
+| `DELETE` | `/products/:id` | Desactivar un producto |
+
+Filtros disponibles:
+
+```text
+GET /api/products?categoryId=1
+GET /api/products?search=chocolate
+GET /api/products?includeInactive=true
+GET /api/categories?includeInactive=true
+```
+
+Ejemplo para crear un producto:
+
+```bash
+curl -X POST http://localhost:3000/api/products \
+  -H "Content-Type: application/json" \
+  -d '{"sku":"PAN-002","name":"Pan integral","price":3.5,"stock":30,"categoryId":1}'
+```

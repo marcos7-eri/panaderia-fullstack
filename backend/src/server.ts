@@ -1,6 +1,9 @@
 import cors from 'cors';
 import 'dotenv/config';
 import express from 'express';
+import { errorHandler, notFoundHandler } from './middleware/error-handler';
+import { categoryRouter } from './routes/category.routes';
+import { productRouter } from './routes/product.routes';
 
 const app = express();
 const port = Number(process.env.PORT ?? 3000);
@@ -15,6 +18,11 @@ app.get('/api/health', (_request, response) => {
     message: 'La API está funcionando correctamente.'
   });
 });
+
+app.use('/api/categories', categoryRouter);
+app.use('/api/products', productRouter);
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 app.listen(port, '0.0.0.0', () => {
   console.log(`API disponible en http://localhost:${port}/api`);

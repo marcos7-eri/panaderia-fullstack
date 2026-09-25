@@ -98,3 +98,15 @@ Este documento conserva los prompts utilizados durante el desarrollo del proyect
 
 **Evidencia sugerida:** captura de los registros anteriores al cambio y del backend saludable después de reconstruir la imagen.
 
+## Prompt 04 — API REST de categorías y productos
+
+**Objetivo:** implementar las primeras operaciones CRUD del backend utilizando Express, TypeScript y Prisma.
+
+**Prompt utilizado:**
+
+> Actúa como desarrollador backend. Implementa una API REST con Express, TypeScript y Prisma para administrar categorías y productos de la panadería. Organiza el código mediante rutas, controladores, configuración, validaciones y middleware de errores. Incluye operaciones para listar, consultar, crear, actualizar y desactivar categorías y productos. Permite filtrar productos por categoría y buscarlos por nombre, descripción o código SKU. Valida identificadores, campos obligatorios, precios positivos, stock no negativo y categorías activas. Utiliza desactivación lógica al eliminar para conservar la información histórica. Documenta los endpoints y no desarrolles todavía clientes ni pedidos.
+
+**Resultado:** se implementaron diez endpoints REST, validación de datos, respuestas HTTP apropiadas, búsqueda y filtros, control de duplicados y desactivación lógica de registros.
+
+**Evidencia sugerida:** capturas de las respuestas JSON de `GET /api/categories`, `GET /api/products` y de la creación de un producto mediante Postman, Insomnia o la terminal.
+
